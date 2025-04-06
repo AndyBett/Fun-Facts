@@ -20,6 +20,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<ThemeProvider>(context, listen: false).loadMode();
+  }
+
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(

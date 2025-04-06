@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:funfacts/Providers/themeProvider.dart';
+import 'package:provider/provider.dart';
 
 class Themeswitcher extends StatefulWidget {
   const Themeswitcher({super.key});
@@ -8,9 +10,10 @@ class Themeswitcher extends StatefulWidget {
 }
 
 class _ThemeswitcherState extends State<Themeswitcher> {
-  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -23,15 +26,14 @@ class _ThemeswitcherState extends State<Themeswitcher> {
           Row(
             children: [
               Switch(
-                  value: isChecked,
+                  value: themeProvider.isDarkModeChecked,
                   onChanged: (value) {
-                    isChecked = value;
-                    setState(() {});
+                    themeProvider.updateMode(darkMode: value);
                   }),
               SizedBox(
                 width: 20,
               ),
-              Text(isChecked ? "Dark Mode" : "Light Mode")
+              Text(themeProvider.isDarkModeChecked ? "Dark Mode" : "Light Mode")
             ],
           ),
         ],
